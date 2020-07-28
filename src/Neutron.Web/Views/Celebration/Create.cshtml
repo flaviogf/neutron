@@ -1,0 +1,36 @@
+﻿@using Neutron.Web.ViewModels
+
+@model CreateCelebrationViewModel
+
+@section styles {
+    <link href="~/css/celebration/create.css" rel="stylesheet" />
+}
+
+<main class="celebration__create">
+    <form asp-action="Create" asp-controller="Celebration" class="celebration__create__form">
+        <div class="celebration__create__input-container">
+            <label asp-for="Name" class="celebration__create__label"></label>
+            <input asp-for="Name" class="celebration__create__input" />
+        </div>
+
+        <div class="celebration__create__input-group">
+            <div class="celebration__create__input-container celebration__create__input-container--number">
+                <input asp-for="Year" class="celebration__create__input celebration__create__input--number" placeholder="00" />
+            </div>
+
+            <div class="celebration__create__input-container celebration__create__input-container--number">
+                <input asp-for="Month" class="celebration__create__input celebration__create__input--number" placeholder="01" />
+            </div>
+
+            <div class="celebration__create__input-container celebration__create__input-container--number">
+                <input asp-for="Day" class="celebration__create__input celebration__create__input--number" placeholder="01" />
+            </div>
+        </div>
+
+        <div class="celebration__create__buttons">
+            <a class="celebration__create__button celebration__create__button--cancel" href="#">Cancel</a>
+
+            <button class="celebration__create__button celebration__create__button--start" type="submit">Start</button>
+        </div>
+    </form>
+</main>

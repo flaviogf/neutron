@@ -19,6 +19,8 @@ namespace Neutron.Web
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
+
             app.UseRouting();
 
             app.UseEndpoints(it => it.MapControllers());

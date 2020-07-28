@@ -1,0 +1,19 @@
+﻿:root {
+    --blue: #1A1F38;
+    --blue-light-001: #2C314F;
+    --gray: #2C314F;
+    --gray-light-001: #777777;
+    --yellow: #FFE500;
+    --white: #FAFAFA;
+}
+
+* {
+    color: var(--white);
+    font-family: 'Roboto', sans-serif;
+    outline: none;
+}
+
+html, body {
+    background-color: var(--blue);
+    height: 100%;
+}
