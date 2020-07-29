@@ -35,5 +35,14 @@ namespace Neutron.Infrastructure
 
             return maybeEvent;
         }
+
+        public Task<Result> Remove(Event @event)
+        {
+            _context.Events.Remove(@event);
+
+            var result = Result.Success();
+
+            return Task.FromResult(result);
+        }
     }
 }

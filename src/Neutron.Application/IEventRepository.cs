@@ -13,5 +13,7 @@ namespace Neutron.Application
         IEnumerable<Event> FindAll();
 
         Task<Maybe<Event>> FindById(Guid id);
+
+        Task<Result> Remove(Event @event);
     }
 }
