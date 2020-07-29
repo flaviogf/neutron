@@ -1,8 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoMapper;
 using CSharpFunctionalExtensions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Neutron.Application;
 using Neutron.Core;
 using Neutron.Infrastructure;
 using Neutron.Web.ViewModels;
@@ -12,15 +15,25 @@ namespace Neutron.Web.Controllers
     [Route("[controller]")]
     public class EventController : Controller
     {
+        private readonly IEventRepository _eventRepository;
         private readonly IUnitOfWork _uow;
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
 
-        public EventController(IUnitOfWork uow, IMediator mediator, IMapper mapper)
+        public EventController(IEventRepository eventRepository, IUnitOfWork uow, IMediator mediator, IMapper mapper)
         {
+            _eventRepository = eventRepository;
             _uow = uow;
             _mediator = mediator;
             _mapper = mapper;
+        }
+
+        [HttpGet]
+        public IActionResult Index()
+        {
+            IEnumerable<Event> events = _eventRepository.FindAll();
+
+            return View(events);
         }
 
         [HttpGet("Create")]
@@ -48,7 +61,24 @@ namespace Neutron.Web.Controllers
 
             _uow.Commit();
 
-            return RedirectToAction("Create", "Event");
+            return RedirectToAction("Index", "Event");
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Show([FromRoute] Guid id)
+        {
+            Maybe<Event> maybeEvent = await _eventRepository.FindById(id);
+
+            if (maybeEvent.HasNoValue)
+            {
+                TempData["Failure"] = "Event does not exist";
+
+                return RedirectToAction("Index", "Event");
+            }
+
+            Event @event = maybeEvent.Value;
+
+            return View(@event);
         }
     }
 }
