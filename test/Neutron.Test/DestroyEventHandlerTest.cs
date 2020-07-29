@@ -12,7 +12,7 @@ namespace Neutron.Test
     public class DestroyEventHandlerTest
     {
         [Fact]
-        public async Task ShouldReturnSuccess()
+        public async Task Should_Return_Success()
         {
             var eventRepository = new Mock<IEventRepository>();
 
