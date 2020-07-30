@@ -57,7 +57,7 @@ namespace Neutron.Web.Controllers
                 return RedirectToAction("Create", "Event");
             }
 
-            TempData["Success"] = "Event has been created";
+            TempData["Success"] = "The countdown for the event has been started";
 
             _uow.Commit();
 
@@ -79,6 +79,28 @@ namespace Neutron.Web.Controllers
             Event @event = maybeEvent.Value;
 
             return View(@event);
+        }
+
+        [HttpPost("{id}")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Destroy(Guid id)
+        {
+            var destroyEvent = new DestroyEvent(id);
+
+            Result result = await _mediator.Send(destroyEvent);
+
+            if (result.IsFailure)
+            {
+                TempData["Failure"] = result.Error;
+
+                return RedirectToAction("Index", "Event");
+            }
+
+            TempData["Success"] = "The countdown for the event has been stopped";
+
+            _uow.Commit();
+
+            return RedirectToAction("Index", "Event");
         }
     }
 }
