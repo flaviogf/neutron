@@ -1,0 +1,14 @@
+﻿@using Neutron.Core
+
+@model Event
+
+<main>
+    <form asp-action="Destroy" asp-controller="Event">
+        <input asp-for="Id" hidden />
+
+        <h3>@Model.Name</h3>
+        <p>@Model.Target</p>
+
+        <button type="submit">Stop</button>
+    </form>
+</main>

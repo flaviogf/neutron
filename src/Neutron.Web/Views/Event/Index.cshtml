@@ -1,0 +1,15 @@
+﻿@using Neutron.Core
+
+@model IEnumerable<Event>
+
+<ul>
+    @foreach (var it in Model)
+    {
+        <li>
+            <a asp-action="Show" asp-controller="Event" asp-route-id="@it.Id">
+                <h3>@it.Name</h3>
+                <p>@it.Target</p>
+            </a>
+        </li>
+    }
+</ul>
