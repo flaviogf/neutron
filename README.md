@@ -2,7 +2,7 @@
 
 ## Features
 
-- [ ] User can create an account
+- [x] User can create an account
 - [ ] User can sign-in
 - [ ] User can sign-out
 - [x] User can create a event
