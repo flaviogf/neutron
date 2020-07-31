@@ -40,7 +40,7 @@ namespace Neutron.Web.Controllers
             {
                 TempData["Failure"] = result.Errors.Select(it => it.Description).FirstOrDefault();
 
-                return RedirectToAction("Create", "SignUp");
+                return View(viewModel);
             }
 
             await _signInManager.SignInAsync(user, isPersistent: true);
