@@ -1,0 +1,11 @@
+﻿@using Neutron.Web.ViewModels
+
+@model CreateSignUpViewModel
+
+<main>
+    <form asp-action="Create" asp-controller="SignUp">
+        <input asp-for="UserName" />
+        <input asp-for="Password" />
+        <button type="submit">Sign up</button>
+    </form>
+</main>

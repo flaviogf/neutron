@@ -9,7 +9,7 @@ using Neutron.Infrastructure;
 namespace Neutron.Web.Migrations
 {
     [DbContext(typeof(NeutronDbContext))]
-    [Migration("20200728151334_V1")]
+    [Migration("20200731114553_V1")]
     partial class V1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
