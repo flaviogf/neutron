@@ -65,6 +65,8 @@ namespace Neutron.Web
             },
             Assembly.GetExecutingAssembly());
 
+            services.AddHttpContextAccessor();
+
             services.AddControllersWithViews();
         }
 
