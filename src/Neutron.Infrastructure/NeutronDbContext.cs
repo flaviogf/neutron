@@ -28,6 +28,11 @@ namespace Neutron.Infrastructure
                 .Entity<Event>()
                 .Property(it => it.Target)
                 .IsRequired();
+
+            modelBuilder
+                .Entity<Event>()
+                .Property<string>("UserId")
+                .HasColumnType("TEXT");
         }
     }
 }

@@ -15,5 +15,7 @@ namespace Neutron.Application
         Task<Maybe<Event>> FindById(Guid id);
 
         Task<Result> Remove(Event @event);
+
+        Task<int> Count();
     }
 }

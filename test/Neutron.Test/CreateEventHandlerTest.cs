@@ -61,5 +61,37 @@ namespace Neutron.Test
 
             Assert.True(result.IsFailure);
         }
+
+        [Fact]
+        public async Task When_The_Number_Of_Events_Already_Registered_Is_Greater_Than_Four_Should_Return_Failure()
+        {
+            var createEvent = new CreateEvent(Guid.NewGuid(), "Christmas", new DateTime(year: 2020, month: 12, day: 25));
+
+            var eventRepository = new Mock<IEventRepository>();
+
+            eventRepository.Setup(it => it.Count()).Returns(Task.FromResult(5));
+
+            var handler = new CreateEventHandler(eventRepository.Object);
+
+            Result result = await handler.Handle(createEvent, CancellationToken.None);
+
+            Assert.True(result.IsFailure);
+        }
+
+        [Fact]
+        public async Task When_The_Number_Of_Events_Already_Registered_Is_Equal_Four_Should_Return_Failure()
+        {
+            var createEvent = new CreateEvent(Guid.NewGuid(), "Christmas", new DateTime(year: 2020, month: 12, day: 25));
+
+            var eventRepository = new Mock<IEventRepository>();
+
+            eventRepository.Setup(it => it.Count()).Returns(Task.FromResult(4));
+
+            var handler = new CreateEventHandler(eventRepository.Object);
+
+            Result result = await handler.Handle(createEvent, CancellationToken.None);
+
+            Assert.True(result.IsFailure);
+        }
     }
 }

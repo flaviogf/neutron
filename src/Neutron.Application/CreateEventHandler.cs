@@ -18,6 +18,13 @@ namespace Neutron.Application
 
         public async Task<Result> Handle(CreateEvent request, CancellationToken cancellationToken)
         {
+            Result result = await CheckIfMoreEventsCanBeAdded();
+
+            if (result.IsFailure)
+            {
+                return Result.Failure(result.Error);
+            }
+
             Result<Event> eventResult = await CreateEvent(request);
 
             if (eventResult.IsFailure)
@@ -30,6 +37,18 @@ namespace Neutron.Application
             if (eventResult.IsFailure)
             {
                 return Result.Failure(eventResult.Error);
+            }
+
+            return Result.Success();
+        }
+
+        private async Task<Result> CheckIfMoreEventsCanBeAdded()
+        {
+            int numberOfEvents = await _eventRepository.Count();
+
+            if (numberOfEvents >= 4)
+            {
+                return Result.Failure("Each user can just have four events for waiting");
             }
 
             return Result.Success();
