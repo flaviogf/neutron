@@ -2,6 +2,8 @@
 
 @model Event
 
+<partial name="_Navbar" />
+
 <main>
     <form asp-action="Destroy" asp-controller="Event">
         <input asp-for="Id" hidden />

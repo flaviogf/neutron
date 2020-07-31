@@ -1,0 +1,11 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Neutron.Infrastructure
+
+@inject UserManager<ApplicationUser> UserManager
+
+<nav>
+    <form asp-action="Destroy" asp-controller="SignOut">
+        <span>@UserManager.GetUserName(User)</span>
+        <button>Sign out</button>
+    </form>
+</nav>

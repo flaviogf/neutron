@@ -3,6 +3,8 @@
 
 @model CreateEventViewModel
 
+<partial name="_Navbar" />
+
 <form asp-action="Create" asp-controller="Event">
     <input asp-for="Id" hidden value="@Guid.NewGuid()" />
 
