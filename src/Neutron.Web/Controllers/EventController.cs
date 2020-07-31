@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using CSharpFunctionalExtensions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Neutron.Application;
 using Neutron.Core;
@@ -12,6 +13,7 @@ using Neutron.Web.ViewModels;
 
 namespace Neutron.Web.Controllers
 {
+    [Authorize]
     [Route("[controller]")]
     public class EventController : Controller
     {
