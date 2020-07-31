@@ -48,8 +48,8 @@ namespace Neutron.Web
             services.ConfigureApplicationCookie(it =>
             {
                 it.Cookie.HttpOnly = true;
-                it.LoginPath = "/SignUp";
-                it.AccessDeniedPath = "/SignUp";
+                it.LoginPath = "/SignIn";
+                it.AccessDeniedPath = "/SignIn";
                 it.SlidingExpiration = true;
             });
 
