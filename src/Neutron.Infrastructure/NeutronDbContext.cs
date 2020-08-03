@@ -33,6 +33,18 @@ namespace Neutron.Infrastructure
                 .Entity<Event>()
                 .Property<string>("UserId")
                 .HasColumnType("TEXT");
+
+            modelBuilder
+                .Entity<Event>()
+                .Ignore(it => it.TimeLeft);
+
+            modelBuilder
+                .Entity<Event>()
+                .Ignore(it => it.HasArrived);
+
+            modelBuilder
+                .Entity<Event>()
+                .Ignore(it => it.HasNotArrived);
         }
     }
 }
