@@ -4,8 +4,16 @@
 
 <main>
     <form asp-action="Create" asp-controller="SignIn">
-        <input asp-for="UserName" />
-        <input asp-for="Password" />
+        <div>
+            <input asp-for="UserName" />
+            <span asp-validation-for="UserName"></span>
+        </div>
+
+        <div>
+            <input asp-for="Password" />
+            <span asp-validation-for="Password"></span>
+        </div>
+
         <button type="submit">Sign in</button>
     </form>
 </main>
