@@ -8,16 +8,13 @@
     @foreach (var it in Model)
     {
         <li>
-            <a asp-action="Show" asp-controller="Event" asp-route-id="@it.Id">
-                <h3>@it.Name</h3>
-                <p>@it.Target</p>
-
-                @{
-                    var timeLeft = it.TimeLeft;
-                }
-
-                <p data-time-left>Days: @timeLeft.Days.ToString("00") Hours: @timeLeft.Hours.ToString("00"):@timeLeft.Minutes.ToString("00"):@timeLeft.Seconds.ToString("00")</p>
-            </a>
+            <h3><a asp-action="Show" asp-controller="Event" asp-route-id="@it.Id">@it.Name</a></h3>
+            <p>@it.Target</p>
+            <div data-event="@it.Id"></div>
         </li>
     }
 </ul>
+
+@section scripts {
+    <script src="~/js/event.js"></script>
+}
