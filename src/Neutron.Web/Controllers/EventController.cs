@@ -5,10 +5,13 @@ using AutoMapper;
 using CSharpFunctionalExtensions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Neutron.Application;
 using Neutron.Core;
 using Neutron.Infrastructure;
+using Neutron.Web.Hubs;
 using Neutron.Web.ViewModels;
 
 namespace Neutron.Web.Controllers
@@ -17,13 +20,17 @@ namespace Neutron.Web.Controllers
     [Route("[controller]")]
     public class EventController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IHubContext<EventHub, IEventClient> _eventHub;
         private readonly IEventRepository _eventRepository;
         private readonly IUnitOfWork _uow;
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
 
-        public EventController(IEventRepository eventRepository, IUnitOfWork uow, IMediator mediator, IMapper mapper)
+        public EventController(UserManager<ApplicationUser> userManager, IHubContext<EventHub, IEventClient> eventHub, IEventRepository eventRepository, IUnitOfWork uow, IMediator mediator, IMapper mapper)
         {
+            _userManager = userManager;
+            _eventHub = eventHub;
             _eventRepository = eventRepository;
             _uow = uow;
             _mediator = mediator;
@@ -50,7 +57,7 @@ namespace Neutron.Web.Controllers
         {
             CreateEvent createEvent = _mapper.Map<CreateEvent>(viewModel);
 
-            Result result = await _mediator.Send(createEvent);
+            Result<Event> result = await _mediator.Send(createEvent);
 
             if (result.IsFailure)
             {
@@ -62,6 +69,10 @@ namespace Neutron.Web.Controllers
             TempData["Success"] = "The countdown for the event has been started";
 
             _uow.Commit();
+
+            string userId = _userManager.GetUserId(User);
+
+            await _eventHub.Clients.User(userId).Start(result.Value);
 
             return RedirectToAction("Index", "Event");
         }
@@ -89,7 +100,7 @@ namespace Neutron.Web.Controllers
         {
             var destroyEvent = new DestroyEvent(id);
 
-            Result result = await _mediator.Send(destroyEvent);
+            Result<Event> result = await _mediator.Send(destroyEvent);
 
             if (result.IsFailure)
             {
@@ -101,6 +112,10 @@ namespace Neutron.Web.Controllers
             TempData["Success"] = "The countdown for the event has been stopped";
 
             _uow.Commit();
+
+            string userId = _userManager.GetUserId(User);
+
+            await _eventHub.Clients.User(userId).Stop(result.Value);
 
             return RedirectToAction("Index", "Event");
         }

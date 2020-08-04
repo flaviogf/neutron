@@ -7,7 +7,7 @@ using Neutron.Core;
 
 namespace Neutron.Application
 {
-    public class CreateEventHandler : IRequestHandler<CreateEvent, Result>
+    public class CreateEventHandler : IRequestHandler<CreateEvent, Result<Event>>
     {
         private readonly IEventRepository _eventRepository;
 
@@ -16,30 +16,30 @@ namespace Neutron.Application
             _eventRepository = eventRepository;
         }
 
-        public async Task<Result> Handle(CreateEvent request, CancellationToken cancellationToken)
+        public async Task<Result<Event>> Handle(CreateEvent request, CancellationToken cancellationToken)
         {
             Result result = await CheckIfMoreEventsCanBeAdded();
 
             if (result.IsFailure)
             {
-                return Result.Failure(result.Error);
+                return Result.Failure<Event>(result.Error);
             }
 
             Result<Event> eventResult = await CreateEvent(request);
 
             if (eventResult.IsFailure)
             {
-                return Result.Failure(eventResult.Error);
+                return Result.Failure<Event>(eventResult.Error);
             }
 
             eventResult = await AddEvent(eventResult.Value);
 
             if (eventResult.IsFailure)
             {
-                return Result.Failure(eventResult.Error);
+                return Result.Failure<Event>(eventResult.Error);
             }
 
-            return Result.Success();
+            return Result.Success(eventResult.Value);
         }
 
         private async Task<Result> CheckIfMoreEventsCanBeAdded()

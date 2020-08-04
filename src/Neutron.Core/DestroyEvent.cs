@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Neutron.Core
 {
-    public sealed class DestroyEvent : IRequest<Result>
+    public sealed class DestroyEvent : IRequest<Result<Event>>
     {
         public DestroyEvent(Guid id)
         {

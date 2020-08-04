@@ -8,9 +8,15 @@
 <form asp-action="Create" asp-controller="Event">
     <input asp-for="Id" hidden value="@Guid.NewGuid()" />
 
-    <input asp-for="Name" />
+    <div>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
 
-    <input asp-for="Target" />
+    <div>
+        <input asp-for="Target" />
+        <span asp-validation-for="Target"></span>
+    </div>
 
     <button type="submit">Start</button>
 </form>

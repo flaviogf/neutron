@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Neutron.Application;
 using Neutron.Core;
 using Neutron.Infrastructure;
+using Neutron.Web.Hubs;
 using Neutron.Web.ViewModels;
 
 namespace Neutron.Web
@@ -68,6 +69,8 @@ namespace Neutron.Web
             services.AddHttpContextAccessor();
 
             services.AddControllersWithViews();
+
+            services.AddSignalR();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -77,13 +80,22 @@ namespace Neutron.Web
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
+
+            app.UseHttpsRedirection();
+
             app.UseRouting();
 
             app.UseAuthentication();
 
             app.UseAuthorization();
 
-            app.UseEndpoints(it => it.MapControllers());
+            app.UseEndpoints(it =>
+            {
+                it.MapControllers();
+
+                it.MapHub<EventHub>("/eventHub");
+            });
         }
     }
 }

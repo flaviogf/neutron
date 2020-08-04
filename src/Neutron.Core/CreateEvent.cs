@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Neutron.Core
 {
-    public sealed class CreateEvent : IRequest<Result>
+    public sealed class CreateEvent : IRequest<Result<Event>>
     {
         public CreateEvent(Guid id, string name, DateTime? target)
         {

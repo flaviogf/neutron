@@ -6,7 +6,7 @@ using Neutron.Core;
 
 namespace Neutron.Application
 {
-    public class DestroyEventHandler : IRequestHandler<DestroyEvent, Result>
+    public class DestroyEventHandler : IRequestHandler<DestroyEvent, Result<Event>>
     {
         private readonly IEventRepository _eventRepository;
 
@@ -15,23 +15,23 @@ namespace Neutron.Application
             _eventRepository = eventRepository;
         }
 
-        public async Task<Result> Handle(DestroyEvent request, CancellationToken cancellationToken)
+        public async Task<Result<Event>> Handle(DestroyEvent request, CancellationToken cancellationToken)
         {
             Result<Event> eventResult = await GetEvent(request);
 
             if (eventResult.IsFailure)
             {
-                return Result.Failure(eventResult.Error);
+                return Result.Failure<Event>(eventResult.Error);
             }
 
             eventResult = await RemoveEvent(eventResult.Value);
 
             if (eventResult.IsFailure)
             {
-                return Result.Failure(eventResult.Error);
+                return Result.Failure<Event>(eventResult.Error);
             }
 
-            return Result.Success();
+            return Result.Success(eventResult.Value);
         }
 
         public async Task<Result<Event>> GetEvent(DestroyEvent request)
