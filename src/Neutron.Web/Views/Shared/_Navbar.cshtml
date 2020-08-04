@@ -5,7 +5,7 @@
 
 <nav>
     <form asp-action="Destroy" asp-controller="SignOut">
-        <span>@UserManager.GetUserName(User)</span>
+        <span data-user="@UserManager.GetUserId(User)">@UserManager.GetUserName(User)</span>
         <button>Sign out</button>
     </form>
 </nav>
