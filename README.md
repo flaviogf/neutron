@@ -10,4 +10,4 @@
 - [x] An event must have a target date
 - [x] User can have just four events
 - [ ] User must be notified when the date of the event has arrived
-- [ ] User can visualize your events decreasing its time in real-time
+- [x] User can visualize your events decreasing its time in real-time
