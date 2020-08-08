@@ -2,18 +2,30 @@
 
 @model IEnumerable<Event>
 
+@section styles {
+    <link href="~/css/event.css" rel="stylesheet" />
+}
+
+<partial name="_Alert" />
+
 <partial name="_Navbar" />
 
-<ul>
-    @foreach (var it in Model)
-    {
-        <li>
-            <h3><a asp-action="Show" asp-controller="Event" asp-route-id="@it.Id">@it.Name</a></h3>
-            <p>@it.Target</p>
-            <div data-event="@it.Id"></div>
-        </li>
-    }
-</ul>
+<main class="event">
+    <a asp-action="Create" asp-controller="Event" class="event__add">
+        <i class="fa fa-plus-circle"></i>
+    </a>
+
+    <ul class="event__list">
+        @foreach (var it in Model)
+        {
+            <li class="event__item">
+                <h3 class="event__item__title"><a asp-action="Show" asp-controller="Event" asp-route-id="@it.Id">@it.Name</a></h3>
+                <p class="event__item__target">@it.Target</p>
+                <div data-event="@it.Id"></div>
+            </li>
+        }
+    </ul>
+</main>
 
 @section scripts {
     <script src="~/js/event.js"></script>

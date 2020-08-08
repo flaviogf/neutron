@@ -1,0 +1,19 @@
+﻿@if (TempData["Failure"] != null)
+{
+    <div class="alert alert--failure">
+        <div class="alert__container">
+            @TempData["Failure"]
+            <i class="fa fa-times" data-alert-close></i>
+        </div>
+    </div>
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert--success">
+        <div class="alert__container">
+            @TempData["Success"]
+            <i class="fa fa-times" data-alert-close></i>
+        </div>
+    </div>
+}

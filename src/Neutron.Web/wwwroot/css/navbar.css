@@ -1,0 +1,52 @@
+﻿.navbar {
+    margin-bottom: 28px;
+}
+
+.navbar__container {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 640px;
+    padding: 16px;
+    position: relative;
+    width: 100%;
+}
+
+.navbar__brand {
+    color: rgba(255,255,255,0.75);
+    font-size: 20px;
+}
+
+.navbar__user {
+    align-items: center;
+    background: rgba(0,0,0,0.3);
+    border-radius: 100%;
+    cursor: pointer;
+    display: flex;
+    font-size: 24px;
+    font-weight: 600;
+    height: 48px;
+    justify-content: center;
+    width: 48px;
+}
+
+.navbar__button {
+    position: absolute;
+    bottom: -18px;
+    background-color: var(--blue-light-001);
+    border: none;
+    border-radius: 5px;
+    color: var( --yellow);
+    cursor: pointer;
+    display: none;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 12px;
+    right: 16px;
+    text-transform: uppercase;
+}
+
+.navbar__button--visible {
+    display: block;
+}

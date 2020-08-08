@@ -11,3 +11,4 @@
 - [x] User can have just four events
 - [ ] User must be notified when the date of the event has arrived
 - [x] User can visualize your events decreasing its time in real-time
+- [ ] Layout

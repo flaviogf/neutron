@@ -3,20 +3,32 @@
 
 @model CreateEventViewModel
 
+@section styles {
+    <link href="~/css/event.css" rel="stylesheet" />
+}
+
+<partial name="_Alert" />
+
 <partial name="_Navbar" />
 
-<form asp-action="Create" asp-controller="Event">
-    <input asp-for="Id" hidden value="@Guid.NewGuid()" />
+<main class="event">
+    <form asp-action="Create" asp-controller="Event" class="event__form">
+        <input asp-for="Id" hidden value="@Guid.NewGuid()" />
 
-    <div>
-        <input asp-for="Name" />
-        <span asp-validation-for="Name"></span>
-    </div>
+        <div class="event__group">
+            <label asp-for="Name" class="event__label"></label>
+            <input asp-for="Name" class="event__input" />
+            <span asp-validation-for="Name"></span>
+        </div>
 
-    <div>
-        <input asp-for="Target" />
-        <span asp-validation-for="Target"></span>
-    </div>
+        <div class="event__group">
+            <label asp-for="Target" class="event__label"></label>
+            <input asp-for="Target" class="event__input" />
+            <span asp-validation-for="Target"></span>
+        </div>
 
-    <button type="submit">Start</button>
-</form>
+        <button class="event__button event__button--start" type="submit">
+            <i class="fa fa-play"></i> Start
+        </button>
+    </form>
+</main>
