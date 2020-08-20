@@ -84,8 +84,6 @@ namespace Neutron.Web.Controllers
 
             if (maybeEvent.HasNoValue)
             {
-                TempData["Failure"] = "Event does not exist";
-
                 return RedirectToAction("Index", "Event");
             }
 
