@@ -11,7 +11,7 @@
 
 ## :rocket: Project
 
-:calendar: Neutron
+:calendar: Neutron is a simple countdown manager.
 
 ### Preview
 
