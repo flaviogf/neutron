@@ -1,0 +1,19 @@
+﻿.sign-in {
+    margin: 0 auto;
+    max-width: 640px;
+    padding: 32px 16px;
+    width: 100%;
+}
+
+.sign-in__title {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.sign-in__form {
+    margin-top: 48px;
+}
+
+.sign-in__sign-up-button {
+    margin-right: 8px;
+}
