@@ -15,19 +15,19 @@
     <form asp-action="Create" asp-controller="Event" class="event__form">
         <input asp-for="Id" hidden value="@Guid.NewGuid()" />
 
-        <div class="event__group">
-            <label asp-for="Name" class="event__label"></label>
-            <input asp-for="Name" class="event__input" />
+        <div class="input__group">
+            <label asp-for="Name" class="input__label"></label>
+            <input asp-for="Name" class="input__editor" />
             <span asp-validation-for="Name"></span>
         </div>
 
-        <div class="event__group">
-            <label asp-for="Target" class="event__label"></label>
-            <input asp-for="Target" class="event__input" />
+        <div class="input__group">
+            <label asp-for="Target" class="input__label"></label>
+            <input asp-for="Target" class="input__editor" />
             <span asp-validation-for="Target"></span>
         </div>
 
-        <button class="event__button event__button--start" type="submit">
+        <button class="button event__button--start" type="submit">
             <i class="fa fa-play"></i> Start
         </button>
     </form>
