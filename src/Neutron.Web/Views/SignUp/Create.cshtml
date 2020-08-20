@@ -2,18 +2,29 @@
 
 @model CreateSignUpViewModel
 
-<main>
-    <form asp-action="Create" asp-controller="SignUp">
-        <div>
-            <input asp-for="UserName" />
+@section styles {
+    <link href="~/css/sign-up.css" rel="stylesheet" />
+}
+
+<partial name="_Alert" />
+
+<main class="sign-up">
+    <h1 class="sign-up__title">Create account</h1>
+
+    <form asp-action="Create" asp-controller="SignUp" class="sign-up__form">
+        <div class="input__group">
+            <label asp-for="UserName" class="input__label"></label>
+            <input asp-for="UserName" class="input__editor" />
             <span asp-validation-for="UserName"></span>
         </div>
 
-        <div>
-            <input asp-for="Password" />
+        <div class="input__group">
+            <label asp-for="Password" class="input__label"></label>
+            <input asp-for="Password" class="input__editor" />
             <span asp-validation-for="Password"></span>
         </div>
 
-        <button type="submit">Sign up</button>
+        <button class="button" type="submit">Sign up</button>
+        <a asp-action="Create" asp-controller="SignIn" class="button button--outline sign-up__sign-in-button">Sign in</a>
     </form>
 </main>

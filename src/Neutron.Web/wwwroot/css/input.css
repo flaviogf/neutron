@@ -1,0 +1,24 @@
+﻿.input__group {
+    position: relative;
+}
+
+.input__label {
+    background-color: var(--blue);
+    font-size: 14px;
+    left: 8px;
+    padding: 2px 6px;
+    position: absolute;
+    top: -14px;
+}
+
+.input__editor {
+    background-color: var(--blue-light-001);
+    border: 1px solid rgba(0,0,0,0.75);
+    border-radius: 3px;
+    color: var(--white);
+    height: 50px;
+    margin-bottom: 28px;
+    padding: 8px 16px;
+    outline: none;
+    width: 100%;
+}

@@ -1,0 +1,29 @@
+﻿:root {
+    --blue: #1A1F38;
+    --blue-light-001: #2C314F;
+    --green: #388e3C;
+    --red: #D32F2F;
+    --yellow: #F2D903;
+    --white: #F9F9FA;
+}
+
+html, body {
+    background-color: var(--blue);
+    color: var(--white);
+    font-family: 'Open Sans', sans-serif;
+    height: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.field-validation-error {
+    color: var(--red);
+    font-size: 12px;
+    font-weight: 600;
+    left: 16px;
+    position: relative;
+    top: -28px;
+}

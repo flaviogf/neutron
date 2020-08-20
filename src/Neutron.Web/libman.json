@@ -33,6 +33,13 @@
         "dist/browser/signalr.min.js",
         "dist/browser/signalr.min.js.map"
       ]
+    },
+    {
+      "library": "minireset.css@0.0.6",
+      "destination": "wwwroot\\lib\\minireset.css",
+      "files": [
+        "minireset.min.css"
+      ]
     }
   ]
 }

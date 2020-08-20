@@ -3,9 +3,12 @@
 
 @inject UserManager<ApplicationUser> UserManager
 
-<nav>
-    <form asp-action="Destroy" asp-controller="SignOut">
-        <span data-user="@UserManager.GetUserId(User)">@UserManager.GetUserName(User)</span>
-        <button>Sign out</button>
+<nav class="navbar">
+    <form asp-action="Destroy" asp-controller="SignOut" class="navbar__container">
+        <a asp-action="Index" asp-controller="Event" class="navbar__brand">Neutron</a>
+        <span class="navbar__user" data-user="@UserManager.GetUserId(User)">@UserManager.GetUserName(User)?.ToUpper()?.FirstOrDefault()</span>
+        <button class="navbar__button" data-sign-out>
+            <i class="fa fa-sign-out"></i> Sign out
+        </button>
     </form>
 </nav>

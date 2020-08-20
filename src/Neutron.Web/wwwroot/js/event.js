@@ -1,40 +1,48 @@
 ﻿$(document).ready(function () {
-    var userId = $("[data-user]").data("user")
+    var userId = $("[data-user]").data("user");
 
-    var connection = new signalR.HubConnectionBuilder()
-        .withUrl("/eventHub")
-        .withAutomaticReconnect()
-        .build();
+    $("[data-event]").each(function () {
+        var timeout = null
 
-    connection.on("Tack", function (event) {
-        var timeLeft = event.timeLeft
+        var eventId = $(this).data("event");
 
-        var days = timeLeft.days.toString().padStart(2, "0")
-        var hours = timeLeft.hours.toString().padStart(2, "0")
-        var minutes = timeLeft.minutes.toString().padStart(2, "0")
-        var seconds = timeLeft.seconds.toString().padStart(2, "0")
-        var text = `Days: ${days} Hours: ${hours}:${minutes}:${seconds}`;
+        var connection = new signalR.HubConnectionBuilder()
+            .withUrl("/eventHub")
+            .withAutomaticReconnect()
+            .build();
 
-        var p = $("<p>").text(text)
+        connection.on("Tack", function (event) {
+            if (eventId !== event.id) return;
 
-        $(`[data-event=${event.id}]`).html(p)
+            var timeLeft = event.timeLeft;
 
-        connection.invoke("Tick", userId, event.id);
-    });
+            var days = timeLeft.days.toString().padStart(2, "0");
+            var hours = timeLeft.hours.toString().padStart(2, "0");
+            var minutes = timeLeft.minutes.toString().padStart(2, "0");
+            var seconds = timeLeft.seconds.toString().padStart(2, "0");
+            var text = `Days: ${days} Hours: ${hours}:${minutes}:${seconds}`;
 
-    connection.on("Start", function (event) {
-        location.reload();
-    })
+            var p = $("<p>").text(text).addClass('event__item__time-left');
 
-    connection.on("Stop", function (event) {
-        location.reload();
-    });
+            $(`[data-event=${event.id}]`).html(p);
 
-    connection.start().then(function () {
-        $("[data-event]").each(function () {
-            var eventId = $(this).data("event")
+            timeout && clearTimeout(timeout);
 
+            timeout = setTimeout(function () {
+                connection.invoke("Tick", userId, event.id);
+            }, 1000)
+        });
+
+        connection.on("Start", function (event) {
+            location.reload();
+        });
+
+        connection.on("Stop", function (event) {
+            location.reload();
+        });
+
+        connection.start().then(function () {
             connection.invoke("Tick", userId, eventId);
-        })
+        });
     });
 });

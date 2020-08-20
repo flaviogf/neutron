@@ -2,17 +2,27 @@
 
 @model Event
 
+@section styles {
+    <link href="~/css/event.css" rel="stylesheet" />
+}
+
+<partial name="_Alert" />
+
 <partial name="_Navbar" />
 
-<main>
+<main class="event">
     <form asp-action="Destroy" asp-controller="Event">
-        <input asp-for="Id" hidden />
+        <div class="event__item">
+            <input asp-for="Id" hidden />
 
-        <h3>@Model.Name</h3>
-        <p>@Model.Target</p>
-        <div data-event="@Model.Id"></div>
+            <h3 class="event__item__title">@Model.Name</h3>
+            <p class="event__item__target">@Model.Target</p>
+            <div data-event="@Model.Id"></div>
+        </div>
 
-        <button type="submit">Stop</button>
+        <button class="button event__button--stop" type="submit">
+            <i class="fa fa-stop"></i> Stop
+        </button>
     </form>
 </main>
 

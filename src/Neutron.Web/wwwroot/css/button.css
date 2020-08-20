@@ -1,0 +1,18 @@
+﻿.button {
+    background-color: var(--blue-light-001);
+    border: none;
+    border-radius: 5px;
+    color: var( --yellow);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    float: right;
+    padding: 12px;
+    text-transform: uppercase;
+}
+
+.button--outline {
+    background: transparent;
+    color: var(--white);
+    text-decoration: underline;
+}
